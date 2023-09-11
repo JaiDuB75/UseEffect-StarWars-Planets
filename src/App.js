@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useState} from "react";
+import ListPlanets from "./ListPlanets";
 
 function App() {
+
+  const [planets, setPlanets] = useState({});
+
+  useEffect(() => {
+    fetch("https://swapi.dev/api/planets/1/")
+    .then((response) => response.json())
+    .then(setPlanets)
+    .catch((error) => {
+      console.log(error); 
+    })
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <h1>Hello</h1>
+      {planets.name}
+      <ListPlanets />
+    </>
   );
 }
 
